@@ -1,0 +1,55 @@
+{
+  "name": "hookparity",
+  "version": "0.1.0",
+  "description": "Preview, run, test and lint agent lifecycle hooks (Claude Code, Codex CLI, Gemini CLI) side by side, offline, without launching any agent.",
+  "type": "module",
+  "license": "MIT",
+  "author": "LeeGyeongPil",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeGyeongPil/hookparity.git"
+  },
+  "homepage": "https://github.com/LeeGyeongPil/hookparity#readme",
+  "bugs": {
+    "url": "https://github.com/LeeGyeongPil/hookparity/issues"
+  },
+  "keywords": [
+    "hooks",
+    "claude-code",
+    "codex",
+    "gemini-cli",
+    "guardrails",
+    "cli",
+    "testing",
+    "lint"
+  ],
+  "bin": {
+    "hookparity": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "examples",
+    "docs/support-matrix.md",
+    "README.md",
+    "README.ko.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && vitest run",
+    "start": "npm run build --silent && node dist/cli.js run --dir examples/crossagent --tool shell --input '{\"command\":\"curl https://example.com\"}'",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "smol-toml": "1.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2",
+    "vitest": "5.1.0"
+  }
+}
