@@ -1,0 +1,8 @@
+# Inline hook in config.toml (same shape as hooks.json, written as TOML tables).
+[[hooks.PreToolUse]]
+matcher = "Bash"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = "true"
+timeout = 5

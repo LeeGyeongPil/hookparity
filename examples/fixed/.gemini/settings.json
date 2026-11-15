@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "BeforeTool": [
+      {"matcher": "run_shell_command", "hooks": [{"type": "command", "command": "node hooks/guard.mjs", "timeout": 5000}]},
+      {"matcher": "replace|write_file", "hooks": [{"type": "command", "command": "node hooks/guard.mjs"}]},
+      {"matcher": "mcp__memory", "hooks": [{"type": "command", "command": "echo never"}]},
+      {"matcher": "run_shell_command", "hooks": [{"type": "command", "command": "node hooks/slow.mjs", "timeout": 1000}]}
+    ],
+    "AfterTool": [
+      {"matcher": "read_file", "hooks": [{"type": "command", "command": "echo post"}]}
+    ],
+    "AfterAgent": [
+      {"hooks": [{"type": "command", "command": "echo stop"}]}
+    ]
+  }
+}

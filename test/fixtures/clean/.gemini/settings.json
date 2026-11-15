@@ -1,0 +1,8 @@
+{
+  "hooks": {
+    "BeforeTool": [
+      {"matcher": "run_shell_command", "hooks": [{"type": "command", "command": "true", "timeout": 5000}]},
+      {"matcher": "mcp_memory_.*", "hooks": [{"type": "command", "command": "true"}]}
+    ]
+  }
+}

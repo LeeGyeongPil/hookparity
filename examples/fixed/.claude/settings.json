@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {"matcher": "Bash", "hooks": [{"type": "command", "command": "node hooks/guard.mjs", "timeout": 5}]},
+      {"matcher": "Edit|Write", "hooks": [{"type": "command", "command": "node hooks/guard.mjs"}]},
+      {"matcher": "mcp__memory", "hooks": [{"type": "command", "command": "echo never"}]},
+      {"matcher": "Bash", "hooks": [{"type": "command", "if": "Bash(git push*)", "command": "node hooks/slow.mjs", "timeout": 1}]}
+    ],
+    "PostToolUse": [
+      {"matcher": "Read", "hooks": [{"type": "command", "command": "echo post"}]}
+    ],
+    "Stop": [
+      {"hooks": [{"type": "command", "command": "echo stop"}]}
+    ]
+  }
+}

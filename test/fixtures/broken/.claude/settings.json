@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "BeforeTool": [
+      {"matcher": "Bash", "hooks": [{"type": "command", "command": "true"}]}
+    ],
+    "PreToolUse": [
+      {"matcher": "Bash(git push)", "hooks": [{"type": "command", "command": "true"}]},
+      {"matcher": "Bash", "hooks": [{"type": "command", "command": "true", "timeout": 5000}]}
+    ],
+    "Stop": [
+      {"hooks": [{"type": "command", "if": "Bash(ls)", "command": "true"}]}
+    ]
+  }
+}

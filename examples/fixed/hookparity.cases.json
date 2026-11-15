@@ -1,0 +1,7 @@
+{
+  "cases": [
+    {"name": "rm -rf is blocked everywhere", "tool": "shell", "input": {"command": "rm -rf build"}, "expect": {"*": "block"}},
+    {"name": "curl is denied", "tool": "shell", "input": {"command": "curl https://example.com"}, "expect": {"claude": "block", "codex": "block", "gemini": "block"}},
+    {"name": "ls is allowed", "tool": "shell", "input": {"command": "ls"}, "expect": {"*": "allow"}}
+  ]
+}

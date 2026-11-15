@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "BeforeTool": [
+      {"matcher": "Bash", "hooks": [{"type": "command", "command": "true", "timeout": 5}]}
+    ]
+  }
+}

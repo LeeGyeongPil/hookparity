@@ -1,0 +1,2 @@
+[[hooks.PreToolUse]
+matcher = "Bash"
