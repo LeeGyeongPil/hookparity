@@ -4,12 +4,14 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.1.1] - 2026-11-27
+
+### Fixed
+- `lint`, `list` and `match` now reject an invalid `--max-timeout` (usage error, exit 2) like `run` and `test`.
 
 ## [0.1.0] - 2026-11-15
 
 ### Known issues
-- `lint --max-timeout -1` is accepted and exits 0 instead of reporting a usage error.
 - `--user` on a settings file without read permission prints a stack trace and exits 1 instead of exit 2.
 
 ### Added

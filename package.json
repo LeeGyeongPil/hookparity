@@ -1,6 +1,6 @@
 {
   "name": "hookparity",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Preview, run, test and lint agent lifecycle hooks (Claude Code, Codex CLI, Gemini CLI) side by side, offline, without launching any agent.",
   "type": "module",
   "license": "MIT",
