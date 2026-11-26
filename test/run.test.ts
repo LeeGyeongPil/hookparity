@@ -90,4 +90,18 @@ describe("run usage errors", () => {
     expect((await cli(["list", "--dir", EXAMPLE, "--agents", "cursor"], { LANG: "C" })).code).toBe(2);
     expect((await cli(["run", "--dir", EXAMPLE, "--tool", "shell", "--max-timeout", "0"], { LANG: "C" })).code).toBe(2);
   });
+  it("validates --max-timeout for lint, list and match too", async () => {
+    const extra: Record<string, string[]> = { lint: [], list: [], match: ["--tool", "shell"] };
+    for (const [cmd, rest] of Object.entries(extra)) {
+      for (const bad of ["-1", "abc", "0"]) {
+        const r = await cli([cmd, "--dir", EXAMPLE, ...rest, "--max-timeout", bad], { LANG: "C" });
+        expect(r.code, `${cmd} ${bad}`).toBe(2);
+        expect(r.stderr).toContain("--max-timeout must be a positive number of seconds");
+      }
+      const ok = await cli([cmd, "--dir", EXAMPLE, ...rest, "--max-timeout", "5"], { LANG: "C" });
+      const plain = await cli([cmd, "--dir", EXAMPLE, ...rest], { LANG: "C" });
+      expect(ok.code).toBe(plain.code);
+      expect(ok.stdout).toBe(plain.stdout);
+    }
+  });
 });

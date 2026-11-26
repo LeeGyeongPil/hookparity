@@ -176,6 +176,8 @@ async function dispatch(argv: readonly string[], ctx: Context, lang: Lang): Prom
   if (!["list", "match", "run", "test", "lint"].includes(command)) {
     throw new UsageError("error.unknownCommand", { command });
   }
+  // Validate for every command so a bad value is never silently ignored (only run/test use it).
+  const maxTimeoutSec = parseMaxTimeout(values["max-timeout"]);
 
   const dir = resolve(ctx.cwd, values.dir ?? ".");
   if (!isDir(dir)) throw new UsageError("error.dirNotFound", { dir });
@@ -215,7 +217,6 @@ async function dispatch(argv: readonly string[], ctx: Context, lang: Lang): Prom
         out(asJson ? render.matchJson(values.tool, input, matches) : render.matchText(style, values.tool, matches));
         return 0;
       }
-      const maxTimeoutSec = parseMaxTimeout(values["max-timeout"]);
       if (!asJson) ctx.stderr(`${render.planText(lang, matches)}\n\n`);
       const report = await executeMatches(matches, { dir, input, maxTimeoutSec });
       out(asJson ? render.resultJson(lang, values.tool, input, report) : render.resultText(style, report));
@@ -223,7 +224,6 @@ async function dispatch(argv: readonly string[], ctx: Context, lang: Lang): Prom
     }
     case "test": {
       if (positionals.length < 2) throw new UsageError("error.noCasesFile");
-      const maxTimeoutSec = parseMaxTimeout(values["max-timeout"]);
       const files: render.FileCases[] = [];
       for (const file of positionals.slice(1)) {
         const cases = loadCases(resolve(ctx.cwd, file));
